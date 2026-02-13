@@ -18,6 +18,16 @@ use spacetimedb::SpacetimeType;
 ///    /
 ///   Z (Backward / Out of Screen)
 /// ```
+///
+/// # Examples
+/// ```
+/// use spacetime_math::Vec3;
+///
+/// let v = Vec3::new(1.0, 2.0, 3.0);
+/// assert_eq!(v.x, 1.0);
+/// assert_eq!(v.y, 2.0);
+/// assert_eq!(v.z, 3.0);
+/// ```
 #[derive(SpacetimeType, Debug, Default, Clone, Copy, PartialEq)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 pub struct Vec3 {
@@ -108,5 +118,73 @@ mod glam_impls {
         fn from(v: Vec3) -> Self {
             glam::DVec3::new(v.x, v.y, v.z)
         }
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn constants_match_constructor() {
+        assert_eq!(
+            Vec3::ZERO,
+            Vec3::new(0.0 as Scalar, 0.0 as Scalar, 0.0 as Scalar)
+        );
+        assert_eq!(
+            Vec3::ONE,
+            Vec3::new(1.0 as Scalar, 1.0 as Scalar, 1.0 as Scalar)
+        );
+        assert_eq!(
+            Vec3::UP,
+            Vec3::new(0.0 as Scalar, 1.0 as Scalar, 0.0 as Scalar)
+        );
+        assert_eq!(
+            Vec3::DOWN,
+            Vec3::new(0.0 as Scalar, -1.0 as Scalar, 0.0 as Scalar)
+        );
+        assert_eq!(
+            Vec3::RIGHT,
+            Vec3::new(1.0 as Scalar, 0.0 as Scalar, 0.0 as Scalar)
+        );
+        assert_eq!(
+            Vec3::LEFT,
+            Vec3::new(-1.0 as Scalar, 0.0 as Scalar, 0.0 as Scalar)
+        );
+        assert_eq!(
+            Vec3::BACKWARD,
+            Vec3::new(0.0 as Scalar, 0.0 as Scalar, 1.0 as Scalar)
+        );
+        assert_eq!(
+            Vec3::FORWARD,
+            Vec3::new(0.0 as Scalar, 0.0 as Scalar, -1.0 as Scalar)
+        );
+    }
+
+    #[cfg(feature = "nalgebra")]
+    #[test]
+    fn nalgebra_roundtrip() {
+        let n = nalgebra::Vector3::<Scalar>::new(1.0 as Scalar, 2.0 as Scalar, 3.0 as Scalar);
+        let v: Vec3 = n.into();
+        let back: nalgebra::Vector3<Scalar> = v.into();
+        assert_eq!(back, nalgebra::Vector3::new(v.x, v.y, v.z));
+    }
+
+    #[cfg(all(feature = "glam", feature = "f32"))]
+    #[test]
+    fn glam_roundtrip_f32() {
+        let g = glam::Vec3::new(1.0, 2.0, 3.0);
+        let v: Vec3 = g.into();
+        let back: glam::Vec3 = v.into();
+        assert_eq!(back, g);
+    }
+
+    #[cfg(all(feature = "glam", feature = "f64"))]
+    #[test]
+    fn glam_roundtrip_f64() {
+        let g = glam::DVec3::new(1.0, 2.0, 3.0);
+        let v: Vec3 = g.into();
+        let back: glam::DVec3 = v.into();
+        assert_eq!(back, g);
     }
 }

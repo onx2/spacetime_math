@@ -1,6 +1,15 @@
 use crate::Scalar;
 use spacetimedb::SpacetimeType;
 
+/// A 2D vector using `x/y`.
+///
+/// ```
+/// use spacetime_math::Vec2;
+///
+/// let v = Vec2::new(1.0, 2.0);
+/// assert_eq!(v.x, 1.0);
+/// assert_eq!(v.y, 2.0);
+/// ```
 #[derive(SpacetimeType, Debug, Default, Clone, Copy, PartialEq)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 pub struct Vec2 {
@@ -71,5 +80,53 @@ mod glam_impls {
         fn from(v: Vec2) -> Self {
             glam::DVec2::new(v.x, v.y)
         }
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn vec2_new_sets_xy() {
+        let v = Vec2::new(1.0 as Scalar, 2.0 as Scalar);
+        assert_eq!(v.x, 1.0 as Scalar);
+        assert_eq!(v.y, 2.0 as Scalar);
+    }
+
+    #[cfg(feature = "nalgebra")]
+    #[test]
+    fn vec2_nalgebra_round_trip() {
+        let v = Vec2::new(3.0 as Scalar, 4.0 as Scalar);
+        let n: nalgebra::Vector2<Scalar> = v.into();
+        assert_eq!(n.x, 3.0 as Scalar);
+        assert_eq!(n.y, 4.0 as Scalar);
+
+        let back: Vec2 = n.into();
+        assert_eq!(back, v);
+    }
+
+    #[cfg(all(feature = "glam", feature = "f32"))]
+    #[test]
+    fn vec2_glam_f32_round_trip() {
+        let v = Vec2::new(5.0 as Scalar, 6.0 as Scalar);
+        let g: glam::Vec2 = v.into();
+        assert_eq!(g.x, 5.0);
+        assert_eq!(g.y, 6.0);
+
+        let back: Vec2 = g.into();
+        assert_eq!(back, v);
+    }
+
+    #[cfg(all(feature = "glam", feature = "f64"))]
+    #[test]
+    fn vec2_glam_f64_round_trip() {
+        let v = Vec2::new(7.0 as Scalar, 8.0 as Scalar);
+        let g: glam::DVec2 = v.into();
+        assert_eq!(g.x, 7.0);
+        assert_eq!(g.y, 8.0);
+
+        let back: Vec2 = g.into();
+        assert_eq!(back, v);
     }
 }

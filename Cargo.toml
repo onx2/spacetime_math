@@ -30,3 +30,6 @@ nalgebra = ["dep:nalgebra"]
 # `f32`/`f64` as mutually-exclusive features
 f32 = []
 f64 = ["nalgebra?/std"]
+
+[package.metadata.docs.rs]
+features = ["glam", "nalgebra", "serde"]
