@@ -9,6 +9,8 @@ authors = ["onx2"]
 keywords = ["math", "spacetimedb", "geometry", "linear-algebra", "gamedev"]
 categories = ["mathematics", "game-development"]
 
+repository = "https://github.com/onx2/spacetimedb_math"
+
 [lib]
 crate-type = ["rlib"]
 
