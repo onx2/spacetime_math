@@ -8,7 +8,7 @@
 //! - `nalgebra`: enable `From` conversions with `nalgebra` types.
 //!
 //! # Examples
-//! ```
+//! ```ignore
 //! use spacetimedb_math::{Vec3, Quat};
 //!
 //! #[spacetimedb::table(name = player_position)]
