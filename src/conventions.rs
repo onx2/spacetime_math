@@ -131,3 +131,48 @@ pub const Z_UP_LEFT_HANDED_FWD_POS_X: Axes = Axes {
     forward: Vec3::new(1.0, 0.0, 0.0),
     right: Vec3::new(0.0, 1.0, 0.0),
 };
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    const EPS: Scalar = 1.0e-6 as Scalar;
+
+    fn assert_axes_orthonormal(axes: Axes) {
+        assert_eq!(axes.up.dot(axes.forward), 0.0 as Scalar);
+        assert_eq!(axes.up.dot(axes.right), 0.0 as Scalar);
+        assert_eq!(axes.forward.dot(axes.right), 0.0 as Scalar);
+        assert_eq!(axes.up.length_squared(), 1.0 as Scalar);
+        assert_eq!(axes.forward.length_squared(), 1.0 as Scalar);
+        assert_eq!(axes.right.length_squared(), 1.0 as Scalar);
+    }
+
+    #[test]
+    fn presets_are_orthonormal() {
+        assert_axes_orthonormal(Y_UP_RIGHT_HANDED_FWD_NEG_Z);
+        assert_axes_orthonormal(Y_UP_RIGHT_HANDED_FWD_POS_Z);
+        assert_axes_orthonormal(Y_UP_LEFT_HANDED_FWD_POS_Z);
+        assert_axes_orthonormal(Z_UP_RIGHT_HANDED_FWD_POS_Y);
+        assert_axes_orthonormal(Z_UP_LEFT_HANDED_FWD_POS_X);
+    }
+
+    #[test]
+    fn try_right_handed_matches_preset() {
+        let axes = Axes::try_right_handed(Vec3::new(0.0, 1.0, 0.0), Vec3::new(0.0, 0.0, -1.0), EPS)
+            .expect("expected axes");
+        assert_eq!(axes, Y_UP_RIGHT_HANDED_FWD_NEG_Z);
+    }
+
+    #[test]
+    fn try_left_handed_matches_preset() {
+        let axes = Axes::try_left_handed(Vec3::new(0.0, 1.0, 0.0), Vec3::new(0.0, 0.0, 1.0), EPS)
+            .expect("expected axes");
+        assert_eq!(axes, Y_UP_LEFT_HANDED_FWD_POS_Z);
+    }
+
+    #[test]
+    fn try_right_handed_rejects_parallel_vectors() {
+        let axes = Axes::try_right_handed(Vec3::new(0.0, 1.0, 0.0), Vec3::new(0.0, 1.0, 0.0), EPS);
+        assert!(axes.is_none());
+    }
+}
