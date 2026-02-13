@@ -1,0 +1,32 @@
+[package]
+name = "spacetime_math"
+version = "0.1.0"
+edition = "2024"
+license = "MIT"
+description = "Common math types and SpacetimeDB integrations for server-side Rust modules."
+documentation = "https://docs.rs/spacetime_math"
+authors = ["onx2"]
+keywords = ["math", "spacetimedb", "geometry", "linear-algebra", "gamedev"]
+categories = ["mathematics", "game-development"]
+
+[lib]
+crate-type = ["rlib"]
+
+[dependencies]
+spacetimedb = {version = "1.12.0"}
+serde = { version = "1.0", features = ["derive"], optional = true }
+glam = { version = "0.32.0", optional = true }
+nalgebra = { version = "0.34.1", optional = true }
+
+[features]
+default = ["f32"]
+# Use these for conversion support
+serde = ["dep:serde"]
+glam = ["dep:glam"]
+nalgebra = ["dep:nalgebra"]
+
+
+# Scalar selection (internal).
+# `f32`/`f64` as mutually-exclusive features
+f32 = []
+f64 = ["nalgebra?/std"]
