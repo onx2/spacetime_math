@@ -1,10 +1,10 @@
 [package]
-name = "spacetime_math"
+name = "spacetimedb_math"
 version = "0.1.0"
 edition = "2024"
 license = "MIT"
 description = "Common math types and SpacetimeDB integrations for server-side Rust modules."
-documentation = "https://docs.rs/spacetime_math"
+documentation = "https://docs.rs/spacetimedb_math"
 authors = ["onx2"]
 keywords = ["math", "spacetimedb", "geometry", "linear-algebra", "gamedev"]
 categories = ["mathematics", "game-development"]

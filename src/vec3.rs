@@ -21,7 +21,7 @@ use spacetimedb::SpacetimeType;
 ///
 /// # Examples
 /// ```
-/// use spacetime_math::Vec3;
+/// use spacetimedb_math::Vec3;
 ///
 /// let v = Vec3::new(1.0, 2.0, 3.0);
 /// assert_eq!(v.x, 1.0);

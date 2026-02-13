@@ -9,7 +9,7 @@
 //!
 //! # Examples
 //! ```
-//! use spacetime_math::{Vec3, Quat};
+//! use spacetimedb_math::{Vec3, Quat};
 //!
 //! #[spacetimedb::table(name = player_position)]
 //! pub struct PlayerPosition {

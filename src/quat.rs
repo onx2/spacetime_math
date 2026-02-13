@@ -11,7 +11,7 @@ use spacetimedb::SpacetimeType;
 ///
 /// # Examples
 /// ```
-/// use spacetime_math::Quat;
+/// use spacetimedb_math::Quat;
 ///
 /// let q = Quat::IDENTITY;
 /// assert_eq!(q.w, 1.0);

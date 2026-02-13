@@ -744,16 +744,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "67b1b7a3b5fe4f1376887184045fcf45c69e92af734b7aaddc05fb777b6fbd03"
 
 [[package]]
-name = "spacetime_math"
-version = "0.1.0"
-dependencies = [
- "glam 0.32.0",
- "nalgebra",
- "serde",
- "spacetimedb",
-]
-
-[[package]]
 name = "spacetimedb"
 version = "1.12.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -868,6 +858,16 @@ dependencies = [
  "spacetimedb-primitives",
  "thiserror",
  "uuid",
+]
+
+[[package]]
+name = "spacetimedb_math"
+version = "0.1.0"
+dependencies = [
+ "glam 0.32.0",
+ "nalgebra",
+ "serde",
+ "spacetimedb",
 ]
 
 [[package]]

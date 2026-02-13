@@ -1,4 +1,4 @@
-# spacetime_math
+# spacetimedb_math
 
 Common math types and SpacetimeDB integrations for server-side Rust modules.
 
@@ -23,7 +23,7 @@ Add the crate with your desired features:
 
 ```
 [dependencies]
-spacetime_math = { version = "0.1", features = ["f32", "glam", "serde"] }
+spacetimedb_math = { version = "0.1", features = ["f32", "glam", "serde"] }
 ```
 
 ## License

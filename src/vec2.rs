@@ -4,7 +4,7 @@ use spacetimedb::SpacetimeType;
 /// A 2D vector using `x/y`.
 ///
 /// ```
-/// use spacetime_math::Vec2;
+/// use spacetimedb_math::Vec2;
 ///
 /// let v = Vec2::new(1.0, 2.0);
 /// assert_eq!(v.x, 1.0);
