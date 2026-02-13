@@ -1,13 +1,11 @@
 use crate::Scalar;
 use spacetimedb::SpacetimeType;
 
-/// A quaternion representing 3D rotation (orientation) in a right-handed, Y-up coordinate system.
+/// A quaternion representing 3D rotation (orientation).
 ///
-/// Positive rotation is counter-clockwise when looking down the axis toward the origin.
+/// Positive rotation follows the right-hand rule.
 ///
-/// Identity (w=1, x=0, y=0, z=0):
-///   - Aligns local Forward to World -Z
-///   - Aligns local Up to World +Y
+/// Identity (w=1, x=0, y=0, z=0) represents no rotation.
 ///
 /// # Examples
 /// ```
@@ -38,8 +36,7 @@ impl Default for Quat {
 }
 
 impl Quat {
-    /// The "No Rotation" quaternion.
-    /// Aligns the entity with the global axes (Forward = -Z, Up = +Y).
+    /// The identity quaternion (no rotation).
     pub const IDENTITY: Self = Self::new(0.0, 0.0, 0.0, 1.0);
 
     #[inline(always)]

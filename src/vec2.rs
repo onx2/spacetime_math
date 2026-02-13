@@ -26,15 +26,17 @@ impl Vec2 {
         Vec2 { x, y }
     }
 
-    /// Extend this vector into 3D by inserting `y` and treating this vector as XZ.
+    /// Extend this vector into 3D by inserting `y` as the middle component.
     ///
-    /// This is the inverse of `Vec3::xz()`.
+    /// This treats the vector as the X and Z components of a `Vec3` and is the inverse of `Vec3::xz()`.
     #[inline]
     pub const fn extend_y(&self, y: Scalar) -> Vec3 {
         Vec3::new(self.x, y, self.y)
     }
 
-    /// Extend this vector into 3D by inserting `z` and treating this vector as XY.
+    /// Extend this vector into 3D by inserting `z` as the last component.
+    ///
+    /// This treats the vector as the X and Y components of a `Vec3`.
     #[inline]
     pub const fn extend_z(&self, z: Scalar) -> Vec3 {
         Vec3::new(self.x, self.y, z)

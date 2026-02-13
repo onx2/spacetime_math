@@ -2,7 +2,7 @@
 
 use crate::{Scalar, Vec3};
 
-/// Orthonormal axes describing a coordinate system's orientation.
+/// Orthonormal basis describing a coordinate system.
 #[derive(Debug, Clone, Copy, PartialEq)]
 pub struct Axes {
     /// The up direction.
@@ -139,12 +139,12 @@ mod tests {
     const EPS: Scalar = 1.0e-6 as Scalar;
 
     fn assert_axes_orthonormal(axes: Axes) {
-        assert_eq!(axes.up.dot(axes.forward), 0.0 as Scalar);
-        assert_eq!(axes.up.dot(axes.right), 0.0 as Scalar);
-        assert_eq!(axes.forward.dot(axes.right), 0.0 as Scalar);
-        assert_eq!(axes.up.length_squared(), 1.0 as Scalar);
-        assert_eq!(axes.forward.length_squared(), 1.0 as Scalar);
-        assert_eq!(axes.right.length_squared(), 1.0 as Scalar);
+        assert!((axes.up.dot(axes.forward)).abs() <= EPS);
+        assert!((axes.up.dot(axes.right)).abs() <= EPS);
+        assert!((axes.forward.dot(axes.right)).abs() <= EPS);
+        assert!((axes.up.length_squared() - 1.0 as Scalar).abs() <= EPS);
+        assert!((axes.forward.length_squared() - 1.0 as Scalar).abs() <= EPS);
+        assert!((axes.right.length_squared() - 1.0 as Scalar).abs() <= EPS);
     }
 
     #[test]

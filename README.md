@@ -14,6 +14,7 @@ Common math types and SpacetimeDB integrations for server-side Rust modules.
 - `serde` — enable `Serialize`/`Deserialize` derives.
 - `glam` — enable `From` conversions with `glam` types.
 - `nalgebra` — enable `From` conversions with `nalgebra` types.
+- `timing` — enable delta-time helpers.
 
 You can enable both `glam` and `nalgebra` at the same time.
 
@@ -24,6 +25,14 @@ Add the crate with your desired features:
 ```
 [dependencies]
 spacetimedb_math = { version = "0.1", features = ["f32", "glam", "serde"] }
+```
+
+Select a coordinate convention when needed:
+
+```
+use spacetimedb_math::conventions;
+
+let axes = conventions::DEFAULT;
 ```
 
 ## License
